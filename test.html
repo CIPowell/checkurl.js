@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src="checkurl.js"></script>
+		<script type="text/javascript">
+			var checker;
+		
+			/**
+			 * Test function to test checkurl
+			 */
+			function main()
+			{
+				/*var checker = new Worker('checkurl_worker.js');
+				
+				checker.addEventListener('message', function(e)
+				{
+					console.debug(e.data);
+					var resp = JSON.parse(e.data);
+					var p = document.createElement('p');
+					if(resp.exists)
+					{
+						p.appendChild(document.createTextNode('url ' + resp.url + ' exists'));
+					}
+					else
+					{
+						p.appendChild(document.createTextNode('url ' + resp.url + ' does not exists'));
+					}
+									
+					document.body.appendChild(p);
+				}, false);
+				
+				checker.postMessage('http://localhost/bragv/example.html');
+				console.debug('sent : http://test.mlst.net');
+				checker.postMessage('http://www.goofle.co.uk');
+				console.debug('sent : http://www.goofle.co.uk');*/
+				
+				checker = new URLChecker();
+				checker.oncheck = function(evt)
+				{
+					var p = document.createElement('p');
+					p.appendChild(document.createTextNode('url : ' + evt.url + (evt.exists ? ' exists' : ' does not exist')));
+					document.body.appendChild(p);
+				}
+				checker.startCheck(location.href);
+			}
+		
+		</script>
+	</head>
+	<body onload="main();">
+	</body>
+</html>
