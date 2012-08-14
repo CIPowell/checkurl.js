@@ -24,7 +24,6 @@ var URLChecker = function(){
 
 	this.startCheck = function(url)
 	{
-		
 		this.checker.postMessage(url);
-	}
+	};
 };
